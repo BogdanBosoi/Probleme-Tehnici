@@ -8,14 +8,15 @@ void Afisare(int k)
 {
 
 	FILE *out = fopen("problema3.out", "a");
+
 	int i = 1, j = 1;
-	for(i = 1; i <= k; i++, printf("\n"))
+	for(i = 1; i <= k; i++, fprintf(out, "\n"))
 		for(j = 1; j <= k; j++)
 			if(j == st[i])
-				printf("D");
+				fprintf(out, "D");
 			else
-				printf("*");
-	printf("\n");
+				fprintf(out, "*");
+	fprintf(out, "\n");
 	fclose(out);
 }
 
@@ -42,6 +43,13 @@ void bkt(int k)
 		}
 }
 
+void clearFile(char* text)
+{
+    FILE *clearMe = fopen(text, "w");
+    fprintf(clearMe, "");
+    fclose(clearMe);
+}
+
 void Citire()
 {
 	FILE *in = fopen("problema3.in", "r");
@@ -53,6 +61,7 @@ void Citire()
 int main()
 {
 	Citire();
+	clearFile("problema3.out");
 	bkt(1);
 	free(st);
 	return 0;
